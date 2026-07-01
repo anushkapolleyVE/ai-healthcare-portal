@@ -1,0 +1,17 @@
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+python-dotenv
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
+email-validator
+pydantic-settings
+yagmail
+groq
+pinecone
+sentence-transformers
+pypdf
+beautifulsoup4
+requests
