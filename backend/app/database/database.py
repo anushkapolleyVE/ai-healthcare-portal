@@ -1,11 +1,19 @@
+import os
+from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-from app.core.config import settings
+load_dotenv()
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL is not set")
 
 engine = create_engine(
-    settings.DATABASE_URL,
-    connect_args={"sslmode": "require"},
+    DATABASE_URL,
+    pool_pre_ping=True,   # tests each connection before using it, reconnects if dead
+    pool_recycle=300,     # recycle connections every 5 min, before Neon kills them
 )
 
 SessionLocal = sessionmaker(
@@ -15,3 +23,10 @@ SessionLocal = sessionmaker(
 )
 
 Base = declarative_base()
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()

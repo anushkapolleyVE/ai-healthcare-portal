@@ -2,21 +2,23 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    POSTGRES_HOST: str
-    POSTGRES_PORT: int = 5432
-    POSTGRES_USER: str
-    POSTGRES_PASSWORD: str
-    POSTGRES_DB: str
-
+    # POSTGRES_HOST: str
+    # POSTGRES_PORT: int = 5432
+    # POSTGRES_USER: str
+    # POSTGRES_PASSWORD: str
+    # POSTGRES_DB: str
+    DATABASE_URL: str
     SECRET_KEY: str
     ALGORITHM: str
     ACCESS_TOKEN_EXPIRE_MINUTES: int
 
-    EMAIL_USER: str
-    EMAIL_PASSWORD: str
+    EMAIL_USER: str | None = None
+    EMAIL_PASSWORD: str | None = None
 
-    GROQ_API_KEY: str
-    PINECONE_API_KEY: str
+
+    # ---------- AI SERVICES ----------
+    GROQ_API_KEY: str | None = None
+    PINECONE_API_KEY: str | None = None
     PINECONE_INDEX_NAME: str = "medical-knowledge-base"
 
     model_config = SettingsConfigDict(

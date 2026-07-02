@@ -11,8 +11,6 @@ from app.repository.appointment_repository import (
     get_active_user_appointment,
 )
 
-from app.services.email_service import send_booking_email
-from app.services.calendar_service import create_calendar_invite
 
 
 def book_appointment(db, current_user, appointment):
@@ -63,23 +61,6 @@ def book_appointment(db, current_user, appointment):
     doctor = db.query(Doctor).filter(
         Doctor.id == appointment.doctor_id
     ).first()
-
-    calendar_file = create_calendar_invite(
-        appointment.id,
-        current_user.name,
-        doctor.name,
-        str(appointment.appointment_date),
-        str(appointment.appointment_time)
-    )
-
-    send_booking_email(
-        patient_email=current_user.email,
-        patient_name=current_user.name,
-        doctor_name=doctor.name,
-        appointment_date=appointment.appointment_date,
-        appointment_time=appointment.appointment_time,
-        attachment_path=calendar_file
-    )
 
     return appointment
 

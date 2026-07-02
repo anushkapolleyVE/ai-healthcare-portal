@@ -8,9 +8,11 @@ from app.repository.chat_repository import (
     get_recent_messages,
     get_all_messages,
 )
-
+if not settings.GROQ_API_KEY:
+    raise Exception("GROQ_API_KEY missing")
 client = Groq(api_key=settings.GROQ_API_KEY)
-
+if not settings.PINECONE_API_KEY:
+    raise Exception("PINECONE_API_KEY missing")
 # --- RAG setup ---
 embedder = SentenceTransformer("all-MiniLM-L6-v2")
 pc = Pinecone(api_key=settings.PINECONE_API_KEY)
