@@ -190,7 +190,8 @@ export const authAPI = {
         'Content-Type': 'multipart/form-data',
       },
     });
-
+      // ✅ CRITICAL FIX
+    localStorage.setItem('token', response.data.access_token);
     return response.data;
   },
 
