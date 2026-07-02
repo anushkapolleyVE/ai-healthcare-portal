@@ -21,7 +21,7 @@ app = FastAPI(
 origins = [
     "http://localhost:5173",              # Vite (local)
     "http://localhost:3000",              # CRA (local)
-    "https://YOUR_PROJECT.vercel.app",    # Replace after Vercel deployment
+    "https://ai-healthcare-portal.vercel.app/",    # Replace after Vercel deployment
 ]
 
 app.add_middleware(
