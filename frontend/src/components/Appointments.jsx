@@ -93,7 +93,7 @@ export const Appointments = () => {
         selectedSlot.slot_date,
         selectedSlot.slot_time
       );
-      setSuccessMsg(`Success! Appointment booked for ${selectedSlot.slot_date} at ${selectedSlot.slot_time}. Check your email for calendar invite.`);
+      setSuccessMsg(`Success! Appointment booked for ${selectedSlot.slot_date} at ${selectedSlot.slot_time}.`);
       setSelectedSlot(null);
       // Refresh slot list and my appointments list
       await Promise.all([
